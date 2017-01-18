@@ -1,7 +1,7 @@
 ---
 - include: github.yml
   tags: github
-  when: GH_TOKEN is defined
+  when: GH_TOKEN != ""
 
 - include: paths.yml
   tags: paths

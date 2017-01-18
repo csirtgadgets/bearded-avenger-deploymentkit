@@ -17,7 +17,7 @@
   tags: test
 
 - name: unarchive
-  unarchive: src=/tmp/cif-{{ cif_release }}.tar.gz dst=/tmp/
+  unarchive: src=/tmp/bearded-avenger-{{ cif_release }}.tar.gz dest=/tmp/
 
 - name: register dir name
   find: paths=/tmp/bearded-avenger-{{ cif_release }} file_type=directory
