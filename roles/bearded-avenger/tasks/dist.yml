@@ -19,18 +19,14 @@
 - name: unarchive
   unarchive: src=/tmp/bearded-avenger-{{ cif_release }}.tar.gz dest=/tmp/
 
-- name: register dir name
-  find: paths=/tmp/bearded-avenger-{{ cif_release }} file_type=directory
-  register: p
-
 - name: install requirements
-  command: pip install -r dev_requirements.txt chdir="{{ p.files[0].path }}"
+  command: pip install -r dev_requirements.txt chdir=/tmp/bearded-avenger-{{ cif_release }}
   become: yes
 
 - name: run tests
-  command: python setup.py test chdir="{{ p.files[0].path }}"
+  command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release }}
   become: yes
 
 - name: install cif
-  command: python setup.py install chdir="{{ p.files[0].path }}"
+  command: python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release }}
   become: yes
