@@ -1,8 +1,8 @@
 # CIFv3 DeploymentKit
 
 ```bash
-$ git clone https://github.com/csirtgadgets/bearded-avenger-deploymentkit.git
-$ cd bearded-avenger-deploymentkit
+$ curl -L https://github.com/csirtgadgets/bearded-avenger-deploymentkit/archive/master.tar.gz > bearded-avenger-deploymentkit.tar.gz
+$ cd bearded-avenger-deploymentkit-master
 $ sudo bash easybutton.sh
 $ sudo service csirtg-smrt stop
 $ sudo su - cif
