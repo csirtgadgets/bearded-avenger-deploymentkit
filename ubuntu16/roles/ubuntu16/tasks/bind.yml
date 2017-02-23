@@ -15,9 +15,7 @@
   copy: src=bind_head dest=/etc/resolvconf/resolv.conf.d/head
 
 - name: enable services at boot
-  service: name={{ item }} enabled=yes state=started
-  with_items:
-    - bind9
+  service: name=bind9 enabled=yes state=restarted
 
 - name: Update resolvconf
   command: resolvconf -u

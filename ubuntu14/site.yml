@@ -31,7 +31,7 @@
       when: CIF_ES == "1"
 
   roles:
-    - { role: ubuntu16, tags: role-ubuntu16 }
+    - { role: ubuntu14, tags: role-ubuntu14 }
     - { role: elasticsearch, tags: role-elasticsearch, when: CIF_ES == "1" }
     - { role: bearded-avenger, tags: role-bearded-avenger }
 

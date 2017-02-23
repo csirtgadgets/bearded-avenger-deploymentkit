@@ -1,21 +1,9 @@
 ---
-# tasks file for elasticsearch
-- name: Add docker key
-  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
 
-- name: Add docker repo
-  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' state=present filename=docker
-
-- name: Update apt cache if needed.
-  apt: update_cache=yes
-
-- name: install deps
-  apt:
-    state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - linux-image-extra-virtual
-    - docker-engine
+- include: centos.yml
+  when: ansible_distribution == "CentOS"
 
 - name: setup ES dirs
   file: path={{ item }} state=directory mode=770
@@ -29,12 +17,6 @@
   with_items:
     - elasticsearch.yml
     - logging.yml
-
-- name: copy sysctl conf for vm.max_map_count
-  template: src=sysctl_conf.j2 dest=/etc/sysctl.d/99-elasticsearch.conf mode=0660
-
-- name: setting sysctl
-  command: sysctl -w vm.max_map_count={{ elasticsearch_vm_max_map_count }}
 
 - name: pull recent docker image
   command: docker pull elasticsearch:{{ elasticsearch_version }}

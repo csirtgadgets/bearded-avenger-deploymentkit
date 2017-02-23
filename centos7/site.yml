@@ -16,8 +16,14 @@
 
   pre_tasks:
 
-    - name: configure python
-      raw: sudo apt-get install python-minimal aptitude -y
+    - name: configure repos
+      raw: rpm -iUvh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+    - name: update yum
+      raw: yum -y update
+
+    - name: configure basics
+      raw: yum install -y gcc python-pip python-devel git libffi-devel openssl-devel
 
     - setup:
        filter: ansible_*
