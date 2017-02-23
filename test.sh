@@ -2,16 +2,8 @@
 
 set -e
 
-# echo 'yes' | sudo add-apt-repository 'ppa:fkrull/deadsnakes-python2.7'
-
-echo 'updating apt-get tree and installing python-pip'
-sudo apt-get update && sudo apt-get install -y python2.7 python-pip python-dev git libffi-dev libssl-dev sqlite3 software-properties-common aptitude
-
-echo 'installing ansible...'
-sudo pip install 'setuptools>=11.3' 'ansible==2.1' versioneer markupsafe
-
-echo 'running ansible...'
-ansible-playbook -i "localhost," -c local elasticsearch.yml -vv
+echo 'giving things a chance to settle...'
+sleep 10
 
 echo 'testing connectivity'
 sudo -u cif cif --config /home/cif/.cif.yml -p
@@ -36,3 +28,17 @@ echo 'waiting...'
 sleep 5
 
 sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
+
+sudo su - cif
+csirtg-smrt -r /etc/cif/rules/default/csirtg.yml -d --remember --client cif --config /etc/cif/csirtg-smrt.yml
+echo 'waiting 15s... let hunter do their thing...'
+sleep 15
+
+cif --config /home/cif/.cif.yml --provider csirtg.io
+
+cif --config /home/cif/.cif.yml --itype ipv4 --feed
+
+cif --config /home/cif/.cif.yml --itype fqdn --feed
+
+cif --config /home/cif/.cif.yml --itype url --feed
+exit

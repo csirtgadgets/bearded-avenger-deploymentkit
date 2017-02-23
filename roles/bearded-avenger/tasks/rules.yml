@@ -1,6 +1,15 @@
 ---
 - name: setup the rules directory
-  file: path="{{ csirtg_smrt_rules_path }}" state=directory mode=770 owner="{{ app_user }}" group="{{ app_group }}"
+  file: path="{{ csirtg_smrt_rules_path }}" state=directory mode=770 owner="{{ app_user }}" group="{{ app_group }}" recurse=yes
 
 - name: copy csirtg-smrt rules
-  copy: src="../../rules/" dest="{{ csirtg_smrt_rules_path }}" backup=yes owner="{{ app_user }}" group="{{ app_group }}"  mode="u=rw,g=rw,o-rwx"
+  command: cp -r "/tmp/bearded-avenger-{{ cif_release }}/rules/default/" "{{ csirtg_smrt_rules_path }}"
+  tags: rules
+
+- name: Update rule permissions
+  file:
+    path: "{{ csirtg_smrt_rules_path }}/default"
+    mode: u=rwX,g=rwX,o=
+    recurse: yes
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"

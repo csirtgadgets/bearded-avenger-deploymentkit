@@ -7,7 +7,12 @@
   tags: paths
 
 - include: dist.yml
+  when: (SDIST is undefined or SDIST == "")
   tags: dist
+
+- include: sdist.yml
+  when: (SDIST is defined and SDIST == "1")
+  tags: sdist
 
 - include: rules.yml
   tags: rules

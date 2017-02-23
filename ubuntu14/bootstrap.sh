@@ -2,37 +2,16 @@
 
 set -e
 
-#echo 'yes' | sudo add-apt-repository 'ppa:fkrull/deadsnakes-python2.7'
+export CIF_ELASTICSEARCH=$CIF_ELASTICSEARCH
 
-echo 'updating apt-get tree and installing python-pip'
-sudo apt-get update && sudo apt-get install -y python2.7 python-pip python-dev git libffi-dev libssl-dev sqlite3 software-properties-common libxml2-dev libxslt1-dev python-lxml
+echo 'installing the basics'
+sudo apt-get update && apt-get install -y build-essential python-dev python2.7 python-pip python-dev aptitude \
+    python-pip libffi-dev libssl-dev sqlite3 software-properties-common
 
 echo 'installing ansible...'
-sudo pip install 'setuptools>=18.5' 'ansible>=2.1,<3.0' versioneer markupsafe
+sudo -H pip install 'setuptools>=11.3,<34.0' 'ansible==2.2.1.0'
 
 echo 'running ansible...'
-ansible-playbook -i "localhost," -c local localhost.yml -vv
+ansible-playbook -i "localhost," -c local site.yml -vv
 
-echo 'testing connectivity'
-sudo -u cif cif --config /home/cif/.cif.yml -p
-
-echo 'testing query'
-sudo -u cif cif --config /home/cif/.cif.yml --search example.com
-
-echo 'waiting...'
-sleep 5
-
-echo 'testing query'
-sudo -u cif cif --config /home/cif/.cif.yml --search example.com
-
-echo 'waiting...'
-sleep 5
-
-sudo -u cif cif --config /home/cif/.cif.yml --itype ipv4
-
-sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
-
-echo 'waiting...'
-sleep 5
-
-sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
+bash ../test.sh
