@@ -13,6 +13,7 @@
   vars:
     CIF_ES: "{{ lookup('env', 'ANSIBLE_CIF_ES') }}"
     GH_TOKEN: "{{ lookup('env', 'GH_TOKEN' }}"
+    CIF_SDIST: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') }}"
 
   pre_tasks:
 
@@ -29,6 +30,9 @@
 
     - debug: msg="Configuring with ElasticSearch"
       when: CIF_ES == "1"
+
+    - debug: msg="Configuring with SDIST"
+      when: CIF_SDIST == "1"
 
   roles:
     - { role: ubuntu16, tags: role-ubuntu16 }

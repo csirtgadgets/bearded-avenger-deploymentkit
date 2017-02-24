@@ -6,12 +6,15 @@
 - include: paths.yml
   tags: paths
 
+- include: check_sdist.yml
+  when: (CIF_SDIST is undefined or CIF_SDIST == "")
+
 - include: dist.yml
-  when: (SDIST is undefined or SDIST == "")
+  when: (CIF_SDIST is undefined or CIF_SDIST == "")
   tags: dist
 
 - include: sdist.yml
-  when: (SDIST is defined and SDIST == "1")
+  when: (CIF_SDIST is defined and CIF_SDIST == "1")
   tags: sdist
 
 - include: rules.yml

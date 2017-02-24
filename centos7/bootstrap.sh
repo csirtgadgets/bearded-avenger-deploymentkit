@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export CIF_ELASTICSEARCH=$CIF_ELASTICSEARCH
+export CIF_ANSIBLE_SDIST=$CIF_ANSIBLE_SDIST
+
 sudo rpm -iUvh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 set -e
