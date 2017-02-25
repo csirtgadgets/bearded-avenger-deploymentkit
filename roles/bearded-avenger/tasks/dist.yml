@@ -5,7 +5,6 @@
     url: https://github.com/csirtgadgets/bearded-avenger/archive/{{ cif_release }}.tar.gz
     dest: /tmp/bearded-avenger-{{ cif_release }}.tar.gz
   when: GH_TOKEN == ""
-  tags: test
 
 # github likes to throttle when
 - name: pull release from github
@@ -14,10 +13,9 @@
     dest: /tmp/bearded-avenger-{{ cif_release }}.tar.gz
     headers: "Authorization: Token {{ GH_TOKEN }}"
   when: GH_TOKEN is defined and GH_TOKEN != ""
-  tags: test
 
 - name: unarchive
-  unarchive: src=/tmp/bearded-avenger-{{ cif_release }}.tar.gz dest=/tmp/
+  unarchive: src=/tmp/bearded-avenger-{{ cif_release }}.tar.gz dest=/tmp/ remote_src=true
 
 - name: install requirements
   command: pip install -r dev_requirements.txt chdir=/tmp/bearded-avenger-{{ cif_release }}

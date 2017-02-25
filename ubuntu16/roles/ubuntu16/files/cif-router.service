@@ -6,7 +6,7 @@ Type=simple
 User=cif
 Group=cif
 PIDFile=/run/cif-router.pid
-ExecStart=/usr/local/bin/cif-router -d --config=/etc/cif/cif-router.yml
+ExecStart=/usr/local/bin/cif-router -d --config=/etc/cif/cif-router.yml --hunter-threads 4
 KillMode=process
 Restart=on-failure
 KillSignal=SIGINT

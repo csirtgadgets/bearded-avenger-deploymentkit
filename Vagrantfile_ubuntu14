@@ -12,7 +12,7 @@ $script = <<SCRIPT
 export CIF_ANSIBLE_SDIST=#{sdist}
 export CIF_ANSIBLE_ES=#{es}
 
-cd /vagrant
+cd /vagrant/deployment
 bash easybutton.sh
 SCRIPT
 
