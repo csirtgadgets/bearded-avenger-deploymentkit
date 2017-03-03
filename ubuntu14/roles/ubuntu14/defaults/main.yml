@@ -8,11 +8,13 @@ app_user_home: "/home/{{ app_user }}"
 cif_runtime_path: '/var/lib/cif'
 cif_router_config_path: '/etc/cif/cif-router.yml'
 cif_store_store: 'sqlite'
+cif_hunter_exclude: 'osint.bambenekconsulting.com:dga'
 
 csirtg_smrt_runtime_path: "{{ cif_runtime_path }}"
 csirtg_smrt_cache_path: "{{ cif_runtime_path }}/smrt"
 csirtg_smrt_config_path: '/etc/cif/csirtg-smrt.yml'
 csirtg_smrt_rules_path: '/etc/cif/rules'
+csirtg_smrt_fireball_size: 500
 
 geoip_userid: 999999
 geoip_key: "000000000000"

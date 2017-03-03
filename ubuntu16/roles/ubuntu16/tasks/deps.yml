@@ -28,6 +28,8 @@
     - geoipupdate
     - libgeoip-dev
     - geoip-bin
+    - sqlite3
+    - iotop
 
 - name: update pip
   command: easy_install -U pip

@@ -1,8 +1,4 @@
 ---
 - ufw: rule=allow port={{ item }} state=enabled
-  with_items:
-    - 22
-    - 443
-    - 5000
-    - 8080
+  with_items: "{{ firewall_ports }}"
   tags: ufw
