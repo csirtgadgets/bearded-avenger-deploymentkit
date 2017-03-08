@@ -33,4 +33,4 @@ If you've never worked on a GitHub project, [this is a good piece](https://guide
 * [Project Page](http://csirtgadgets.org/collective-intelligence-framework/)
 
 ##### Fine Print
-_bleeding-edge style distro's (eg: release cycles less than 18-24months, Fedora, non-LTS-release ubuntu, etc...) are highly discouraged and are generally not supported_
+_bleeding-edge style distro's (eg: release cycles less than 18-24months, Fedora, non-LTS-release ubuntu, etc...) are highly discouraged and are generally not supported. unless you have giant truck-loads of cash. then we'll consider it... maybe._
