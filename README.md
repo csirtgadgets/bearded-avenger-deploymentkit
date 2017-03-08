@@ -12,7 +12,7 @@ Welcome to the Bearded-Avenger Deployment Kit! This Kit will help you get CIFv3 
 
 and as always, contributions [welcome!](https://github.com/csirtgadgets/bearded-avenger/issues/new).
 
-# the EasyButton (reads: ... because we all hate to read)
+# the EasyButton (... because we all hate to read)
 In most cases; the default SQLite install should take 5-10min and look something like:  
 
 1. pull the [latest release of the DeploymentKit](https://github.com/csirtgadgets/bearded-avenger-deploymentkit/releases)  
