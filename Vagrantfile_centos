@@ -13,7 +13,7 @@ export CIF_ANSIBLE_SDIST=#{sdist}
 export CIF_ANSIBLE_ES=#{es}
 
 cd /vagrant
-bash easybutton.sh
+CIF_BOOTSTRAP_TEST=1 bash easybutton.sh
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
