@@ -20,7 +20,7 @@ sudo -u cif cif --config /home/cif/.cif.yml --search example.com
 echo 'waiting...'
 sleep 5
 
-sudo -u cif cif --config /home/cif/.cif.yml --itype ipv4
+sudo -u cif cif --config /home/cif/.cif.yml --itype ipv4 --tags saerch
 
 sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
 
@@ -36,9 +36,9 @@ sleep 15
 
 cif --config /home/cif/.cif.yml --provider csirtg.io
 
-cif --config /home/cif/.cif.yml --itype ipv4 --feed
+cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags scanner
 
-cif --config /home/cif/.cif.yml --itype fqdn --feed
+cif --config /home/cif/.cif.yml --itype fqdn --feed --tags search
 
-cif --config /home/cif/.cif.yml --itype url --feed
+cif --config /home/cif/.cif.yml --itype url --feed --tags uce
 exit

@@ -14,11 +14,14 @@
     CIF_ES: "{{ lookup('env', 'ANSIBLE_CIF_ES') }}"
     GH_TOKEN: "{{ lookup('env', 'GH_TOKEN' }}"
     CIF_SDIST: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') }}"
+    cif_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+    cif_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
 
   pre_tasks:
 
     - name: configure repos
       raw: rpm -iUvh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      ignore_errors: yes
 
     - name: update yum
       raw: yum -y update

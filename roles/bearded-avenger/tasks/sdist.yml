@@ -30,4 +30,6 @@
 
 - name: install cif
   command: python setup.py install chdir="{{ p.files[0].path }}"
+  environment:
+    CIF_ENABLE_INSTALL: 1
   become: yes

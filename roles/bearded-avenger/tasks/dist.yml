@@ -24,4 +24,6 @@
   command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release }}
 
 - name: install cif
-  command: CIF_ENABLE_INSTALL=1 python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release }}
+  command: python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release }}
+  environment:
+    CIF_ENABLE_INSTALL: 1

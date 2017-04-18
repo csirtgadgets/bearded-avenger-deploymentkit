@@ -5,3 +5,6 @@
 
 - name: reload systemd
   command: systemctl daemon-reload
+
+- name: reload journald
+  command: systemctl restart systemd-journald
