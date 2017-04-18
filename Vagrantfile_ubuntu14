@@ -11,9 +11,10 @@ es=ENV['CIF_ANSIBLE_ES']
 $script = <<SCRIPT
 export CIF_ANSIBLE_SDIST=#{sdist}
 export CIF_ANSIBLE_ES=#{es}
+export CIF_BOOTSTRAP_TEST=1
 
 cd /vagrant
-CIF_BOOTSTRAP_TEST=1 bash easybutton.sh
+bash easybutton.sh
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
