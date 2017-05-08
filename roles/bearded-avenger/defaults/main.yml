@@ -17,4 +17,4 @@ csirtg_smrt_rules_path: '/etc/cif/rules'
 
 pyversion: 2
 
-cif_release: 3.0.0a16
+cif_release: 3.0.0a19
