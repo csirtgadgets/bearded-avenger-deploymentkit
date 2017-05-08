@@ -15,6 +15,6 @@ sudo yum install -y gcc python-pip python-devel git libffi-devel openssl-devel
 
 bash ../ansible.sh
 
-if [ "$CIF_BOOTSTRAP_TEST" -eq '1' ]; then
+if [[ "$CIF_BOOTSTRAP_TEST" -eq '1' ]]; then
     bash ../test.sh
 fi

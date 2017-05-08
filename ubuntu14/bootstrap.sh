@@ -11,6 +11,6 @@ sudo apt-get update && apt-get install -y build-essential python-dev python2.7 p
 
 bash ../ansible.sh
 
-if [ "$CIF_BOOTSTRAP_TEST" -eq '1' ]; then
+if [[ "$CIF_BOOTSTRAP_TEST" -eq '1' ]]; then
     bash ../test.sh
 fi
