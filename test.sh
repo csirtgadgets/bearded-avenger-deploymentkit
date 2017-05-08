@@ -30,9 +30,9 @@ sleep 5
 sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
 
 sudo su - cif
-csirtg-smrt -r /etc/cif/rules/default/csirtg.yml -f port-scanners -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100
-csirtg-smrt -r /etc/cif/rules/default/csirtg.yml -f uce-urls -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100
-csirtg-smrt -r /etc/cif/rules/default/openphish.yml -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f port-scanners -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f uce-urls -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/openphish.yml -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
 
 echo 'waiting 15s... let hunter do their thing...'
 sleep 15
