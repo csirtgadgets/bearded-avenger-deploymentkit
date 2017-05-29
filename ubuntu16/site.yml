@@ -11,11 +11,12 @@
     - "../global_vars.yml"
 
   vars:
-    CIF_ES: "{{ lookup('env', 'ANSIBLE_CIF_ES') }}"
-    CIF_ES_NODES: "{{ lookup('env','ANSIBLE_CIF_ES_NODES') }}"
+    CIF_ES: "{{ lookup('env', 'CIF_ANSIBLE_ES') }}"
+    cif_store_nodes: "{{ lookup('env','CIF_ANSIBLE_ES_NODES')|default('localhost:9200', true) }}"
     GH_TOKEN: "{{ lookup('env', 'GH_TOKEN' }}"
     CIF_SDIST: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') }}"
     cif_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+    cif_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
     cif_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
 
   pre_tasks:

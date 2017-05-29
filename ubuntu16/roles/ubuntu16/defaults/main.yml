@@ -13,7 +13,9 @@ cif_router_config_path: '/etc/cif/cif-router.yml'
 cif_store_store: 'sqlite'
 cif_hunter_exclude: 'osint.bambenekconsulting.com:dga'
 cif_hunter_threads: 0
+cif_hunter_advanced: 0
 cif_gatherer_geo_fqdn: 0
+cif_store_nodes: 'localhost:9200'
 
 csirtg_smrt_runtime_path: "{{ cif_runtime_path }}"
 csirtg_smrt_cache_path: "{{ cif_runtime_path }}/smrt"

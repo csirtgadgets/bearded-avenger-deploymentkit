@@ -10,8 +10,7 @@ ExecStart=/usr/bin/csirtg-smrt --remember --service --client cif --fireball --de
 KillMode=process
 Restart=on-failure
 KillSignal=SIGINT
-TimeoutStopSec=5
-PrivateTmp=true
+TimeoutStopSec=15
 
 EnvironmentFile=/etc/cif.env
 

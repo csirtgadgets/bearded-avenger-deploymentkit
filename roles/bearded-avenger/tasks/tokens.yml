@@ -1,11 +1,12 @@
 ---
 - name: 'set store args'
   set_fact:
-    cif_store_args: '--nodes {{CIF_ES_NODES}}'
-  when: CIF_ES_NODES != ""
+    cif_store_args: '--nodes {{ cif_store_nodes }}'
+  when: cif_store_store is defined and cif_store_store == 'elasticsearch'
 
 - name: 'create cif sqlite db'
   file: path={{ cif_runtime_path }}/cif.sqlite owner={{ app_user }} group={{ app_group }} mode=0660 state=touch
+  when: cif_store_store is defined and cif_store_store == 'sqlite'
 
 - stat: path={{ cif_admin_config_path }}
   register: f

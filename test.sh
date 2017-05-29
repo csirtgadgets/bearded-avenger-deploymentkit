@@ -30,12 +30,12 @@ sleep 5
 sudo -u cif cif --config /home/cif/.cif.yml -q 93.184.216.34
 
 sudo su - cif
-csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f port-scanners -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
-csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f uce-urls -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
-csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/openphish.yml -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f port-scanners -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid --fireball
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/csirtg.yml -f uce-urls -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid --fireball
+csirtg-smrt --runtime-path=/var/lib/cif -r /etc/cif/rules/default/openphish.yml -d --remember --client cif --config /etc/cif/csirtg-smrt.yml --limit 100 --skip-invalid --fireball
 
-echo 'waiting 15s... let hunter do their thing...'
-sleep 15
+echo 'waiting 30s... let hunter do their thing...'
+sleep 30
 
 cif --config /home/cif/.cif.yml --provider csirtg.io
 
@@ -50,4 +50,6 @@ cif --config /home/cif/.cif.yml --itype url --feed --tags uce
 cif --config /home/cif/.cif.yml --itype url --feed --tags phishing
 
 cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags phishing --confidence 2
+
+cif --config /home/cif/.cif.yml --itype ipv4 --confidence 2,6 --no-feed -d
 exit

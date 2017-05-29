@@ -1,11 +1,11 @@
 ---
 - include: setup_elasticsearch.yml
-  when: CIF_ES_NODES is not defined
+  when: cif_store_store == 'elasticsearch'
 
-- name: set elasticsearch nodes
-  set_fact:
-    elasticsearch_nodes: '{{CIF_ES_NODES}}'
-  when: CIF_ES_NODES is defined
-
-- name: modify etc/default/cif with CIF_ES_NODES
-  lineinfile: dest=/etc/default/cif line='export CIF_STORE_NODES={{ elasticsearch_nodes }}'
+#- name: set elasticsearch nodes
+#  set_fact:
+#    elasticsearch_nodes: '{{ CIF_ES_NODES }}'
+#  when: CIF_ES_NODES is defined
+#
+#- name: modify etc/default/cif with CIF_ES_NODES
+#  lineinfile: dest=/etc/default/cif line='export CIF_STORE_NODES={{ elasticsearch_nodes }}'

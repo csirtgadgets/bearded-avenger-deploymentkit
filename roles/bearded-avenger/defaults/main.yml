@@ -9,6 +9,7 @@ cif_router_config_path: '/etc/cif/cif-router.yml'
 cif_admin_config_path: '/home/cif/.cif.yml'
 cif_store_store: 'sqlite'
 cif_store_args: ''
+cif_store_nodes: 'localhost:9200'
 
 csirtg_smrt_runtime_path: '/var/lib/cif'
 csirtg_smrt_cache_path: "{{ cif_runtime_path }}/smrt"

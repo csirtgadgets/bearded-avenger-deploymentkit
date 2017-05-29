@@ -10,9 +10,12 @@ ExecStart=/usr/local/bin/cif-httpd -d
 KillMode=process
 Restart=on-failure
 KillSignal=SIGINT
-TimeoutStopSec=5
-PrivateTmp=true
-#WorkingDirectory=/home/node/Node/
+TimeoutStopSec=15
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+Nice=-1
 
 
 # https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html

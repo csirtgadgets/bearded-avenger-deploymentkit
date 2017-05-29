@@ -38,6 +38,3 @@
 - name: update vex and requests
   pip: name="{{ item }}" extra_args="--upgrade"
   with_items: [ requests vex ] # requests first, old version conflicts with new pip
-
-- name: install supervisord
-  pip: name='supervisor==3.2.1'
