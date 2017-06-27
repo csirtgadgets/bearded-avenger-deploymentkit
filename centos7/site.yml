@@ -16,6 +16,7 @@
     GH_TOKEN: "{{ lookup('env', 'GH_TOKEN' }}"
     CIF_SDIST: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') }}"
     cif_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+    cif_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
     cif_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
 
   pre_tasks:

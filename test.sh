@@ -52,4 +52,15 @@ cif --config /home/cif/.cif.yml --itype url --feed --tags phishing
 cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags phishing --confidence 2
 
 cif --config /home/cif/.cif.yml --itype ipv4 --confidence 2,6 --no-feed -d
+
+echo
+echo
+echo "testing tokens"
+
+cif-tokens --config /home/cif/.cif.yml
+cif-tokens --config /home/cif/.cif.yml --user test-write --write --create
+cif-tokens --config /home/cif/.cif.yml --user test-read --read --create
+cif-tokens --config /home/cif/.cif.yml --user test-read-write --write --create --read
+CIFSDK_CLIENT_HTTP_TRACE=1 cif-tokens -d --config /home/cif/.cif.yml
+
 exit
