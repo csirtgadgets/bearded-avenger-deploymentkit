@@ -36,6 +36,10 @@ elif [ -f /etc/centos-release ]; then
     . /etc/os-release
     OS=$NAME
     VER=$VERSION_ID
+elif [ -f /etc/redhat-release ]; then
+    . /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
 else
     OS=$(uname -s)
     VER=$(uname -r)
@@ -65,10 +69,15 @@ case $OS in
         echo "We accept Pull Requests! =)"
         exit 1;;
 
-    "Redhat" )
-        echo 'Redhat not yet supported...'
-        echo "We accept Pull Requests! =)"
-        exit 1;;
+    "Red Hat Enterprise Linux Server" )
+       if [ $VER == '7.3' ]; then
+            cd centos7
+            RHEL='1' bash bootstrap.sh
+        else
+            echo 'only RHEL 7.3 is supported'
+            echo "We accept Pull Requests! =)"
+        fi
+        ;;
 
     "CentOS Linux" )
         if [ $VER == '7' ]; then

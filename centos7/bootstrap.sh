@@ -5,10 +5,15 @@ export CIF_ANSIBLE_SDIST=$CIF_ANSIBLE_SDIST
 export CIF_HUNTER_THREADS=$CIF_HUNTER_THREADS
 export CIF_GATHERER_GEO_FQDN=$CIF_GATHERER_GEO_FQDN
 export CIF_HUNTER_ADVANCED=$CIF_HUNTER_ADVANCED
+export RHEL=$RHEL
 
 set -e
 
-yum -y install epel-release
+if [ ${RHEL} == '1' ]; then
+    subscription-manager repos --enable rhel-7-server-extras-rpms
+else
+    yum -y install epel-release
+fi
 yum -y update
 
 echo 'updating apt-get tree and installing python-pip'

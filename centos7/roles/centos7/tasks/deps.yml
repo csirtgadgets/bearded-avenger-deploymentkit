@@ -22,3 +22,6 @@
     - libcurl-devel
     - net-tools
     - wget
+
+- name: update python-dateutil
+  pip: name="python-dateutil==2.4"
