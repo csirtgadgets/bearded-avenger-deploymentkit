@@ -7,13 +7,15 @@ export CIF_GATHERER_GEO_FQDN=$CIF_GATHERER_GEO_FQDN
 export CIF_HUNTER_ADVANCED=$CIF_HUNTER_ADVANCED
 export RHEL=$RHEL
 
-set -e
-
 if [ ${RHEL} == '1' ]; then
     subscription-manager repos --enable rhel-7-server-extras-rpms
 else
     yum -y install epel-release
 fi
+
+# do this after, just in case EPEL is already built in and fails
+set -e
+
 yum -y update
 
 echo 'updating apt-get tree and installing python-pip'
