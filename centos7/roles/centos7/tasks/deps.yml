@@ -28,3 +28,6 @@
 
 - name: update flask-limiter
   pip: name='Flask-Limiter>=0.9.4'
+
+- name: work-around for requests
+  pip: name="requests<2.15"
