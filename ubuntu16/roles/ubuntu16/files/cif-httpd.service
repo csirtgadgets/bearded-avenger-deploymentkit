@@ -7,6 +7,26 @@ User=cif
 Group=cif
 PIDFile=/run/cif-httpd.pid
 ExecStart=/usr/local/bin/cif-httpd -d
+
+# un-comment this and comment out previous "ExecStart=.../cif-httpd -d" when going into production- gunicorn uses way less memory
+# ExecStart=/usr/local/bin/gunicorn -w 4 -b 127.0.0.1:5000 cif.httpd:app --log-level DEBUG --worker-class gevent --preload --max-requests 100 --keep-alive 75 --timeout 75 --log-level DEBUG --access-logfile /var/log/gunicorn/access.log --error-logfile /var/log/gunicorn/error.log --timeout 300
+KillMode=process
+Restart=on-failure
+KillSignal=SIGINT
+TimeoutStopSec=15
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+Nice=-1
+
+
+# https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html
+EnvironmentFile=-/etc/cif.env
+
+[Install]
+WantedBy=multi-user.target
+
 KillMode=process
 Restart=on-failure
 KillSignal=SIGINT

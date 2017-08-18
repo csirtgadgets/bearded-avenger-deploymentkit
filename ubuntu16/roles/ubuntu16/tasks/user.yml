@@ -15,3 +15,6 @@
 
 - name: Ensure .cifrc is linked to .profile
   lineinfile: dest="{{ app_user_home }}/.profile" line=". ~/.cifrc"
+
+- name: 'make sure gunicorn logging paths exist'
+  file: path="/var/log/gunicorn" state=directory mode=770 owner="{{ app_user }}" group="{{ app_group }}"
