@@ -51,7 +51,9 @@ cif --config /home/cif/.cif.yml --itype url --feed --tags phishing
 
 cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags phishing --confidence 2
 
-cif --config /home/cif/.cif.yml --itype ipv4 --confidence 2,6 --no-feed -d
+cif --config /home/cif/.cif.yml --itype ipv4 --confidence 1,6 --no-feed -d
+
+cif --config /home/cif/.cif.yml --itype fqdn --confidence 1,6 --no-feed -d
 
 echo
 echo
