@@ -11,6 +11,8 @@ if [ ${RHEL} == '1' ]; then
     subscription-manager repos --enable rhel-7-server-extras-rpms
 else
     yum -y install epel-release
+    rm -fr /var/cache/yum/*
+    yum clean all
 fi
 
 # do this after, just in case EPEL is already built in and fails
