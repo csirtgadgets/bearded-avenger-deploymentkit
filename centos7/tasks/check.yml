@@ -2,12 +2,12 @@
 
 - name: "Check for 64-bit"
   fail: msg="Must be install 64-bit"
-  when: is_64bit != "x86_64"
+  when: ansible_architecture != "x86_64"
 
 - name: "Check for Centos"
   fail: msg="Must be CentOS, {{ is_centos }}"
-  when: is_centos != "CentOS" and is_centos != "RedHat"
+  when: ansible_distribution != "CentOS" and is_centos != "RedHat"
 
 - name: "Check for version 7"
   fail: msg="Must be version 7, {{ is_centos_version }}"
-  when: (is_centos_version < "7" or is_centos_version >= "8")
+  when: (ansible_distribution_version < "7" or ansible_distribution_version >= "8")
