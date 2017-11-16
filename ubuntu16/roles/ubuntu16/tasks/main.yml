@@ -1,28 +1,16 @@
 ---
 
-- include: check.yml
+- include_tasks: check.yml
   tags: configuration
 
-- include: firewall.yml
+- include_tasks: firewall.yml
   tags: firewall
 
-- include: deps.yml
+- include_tasks: deps.yml
   tags: deps
 
-- include: unattended_updates.yml
+- include_tasks: unattended_updates.yml
   tags: deps
 
-- include: geoip.yml
-  tags: geoip
-
-- include: bind.yml
-  tags: bind
-
-- include: user.yml
-  tags: user
-
-- include: services.yml
-  tags: services
-
-- include: nginx.yml
+- include_tasks: nginx.yml
   tags: nginx

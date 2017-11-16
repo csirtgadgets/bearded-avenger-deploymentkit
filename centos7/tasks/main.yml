@@ -10,17 +10,5 @@
 - include: deps.yml
   tags: configuration
 
-- include: bind.yml
-  tags: bind
-
-- include: geoip.yml
-  tags: geoip
-
-- include: user.yml
-  tags: user
-
-- include: services.yml
-  tags: services
-
 - include: nginx.yml
   tags: nginx

@@ -1,3 +1,4 @@
+---
 - name: Ensure iptables is installed (RedHat).
   yum: pkg=iptables state=installed
 
