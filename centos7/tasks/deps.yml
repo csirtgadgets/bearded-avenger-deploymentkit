@@ -1,0 +1,13 @@
+---
+- name: install EPEL
+  yum: name=epel-release state=latest
+
+- name: install deps
+  yum:
+    state: present
+    pkg: "{{ item }}"
+  with_items:
+    - htop
+    - libcurl-devel
+    - net-tools
+    - wget

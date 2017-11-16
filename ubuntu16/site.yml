@@ -3,21 +3,13 @@
 #   http_proxy: http://proxy.example.com:8080
 ---
 - name: configure platform
-  hosts: all
+  hosts: localhost
   gather_facts: False
   become: True
 
   vars_files:
+    - "vars/main.yml"
     - "../global_vars.yml"
-
-  vars:
-    CIF_ES: "{{ lookup('env', 'CIF_ANSIBLE_ES') }}"
-    cif_store_nodes: "{{ lookup('env','CIF_ANSIBLE_ES_NODES')|default('localhost:9200', true) }}"
-    GH_TOKEN: "{{ lookup('env', 'GH_TOKEN' }}"
-    CIF_SDIST: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') }}"
-    cif_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
-    cif_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
-    cif_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
 
   pre_tasks:
 
@@ -29,25 +21,26 @@
 
     - name: set store fact
       set_fact:
-        cif_store_store: 'elasticsearch'
-      when: CIF_ES == "1"
+        router_store_store: 'elasticsearch'
+      when: CIF_ES == '1'
 
-    - debug: msg="Configuring with ElasticSearch"
-      when: CIF_ES == "1"
+    - name: set build_sdist
+      set_fact:
+        cif_build_sdist: CIF_ANSIBLE_SDIST
+      when: CIF_ANSIBLE_SDIST is defined
 
-    - debug: msg="Configuring with SDIST"
-      when: CIF_SDIST == "1"
+    - import_tasks: tasks/main.yml
+
 
   roles:
-    - { role: ubuntu16, tags: role-ubuntu16 }
-    - { role: elasticsearch, tags: role-elasticsearch, when: CIF_ES == "1" }
-    - { role: bearded-avenger, tags: role-bearded-avenger }
-
-  post_tasks:
-
-    - name: enable services at boot
-      service: name={{ item }} enabled=yes state=started
-      with_items:
-        - cif-router
-        - cif-httpd
-        - csirtg-smrt
+    - { role: elastic.elasticsearch,
+        es_config: {
+          node.data: true,
+          node.master: true,
+        },
+        es_version: "5.4.3",
+        es_instance_name: 'cif',
+        when: router_store_store is defined and router_store_store == 'elasticsearch'
+      }
+    - { role: csirtgadgets.cif, tags: role-cif }
+    - { role: nginx, tags: role-nginx }

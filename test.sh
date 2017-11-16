@@ -6,6 +6,7 @@ echo 'giving things a chance to settle...'
 sleep 10
 
 echo 'testing connectivity'
+curl -v -k https://localhost
 sudo -u cif cif --config /home/cif/.cif.yml -p
 
 echo 'testing query'

@@ -1,0 +1,13 @@
+---
+- name: "Check for version 16.04"
+  fail: msg="Must be version 16.04 or higher"
+  when: ansible_distribution_version | version_compare('16.04', '<')
+
+- include_tasks: firewall.yml
+  tags: firewall
+
+- include_tasks: deps.yml
+  tags: deps
+
+- include_tasks: unattended_updates.yml
+  tags: deps

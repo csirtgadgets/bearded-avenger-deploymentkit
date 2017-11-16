@@ -1,3 +1,0 @@
----
-- include: setup_elasticsearch.yml
-  when: cif_store_store == 'elasticsearch'
