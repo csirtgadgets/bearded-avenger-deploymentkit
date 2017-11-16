@@ -3,4 +3,4 @@
 - src: elastic.elasticsearch
   version: 5.5.1
 
-- src: csirtgadgets.cif
+#- src: csirtgadgets.cif

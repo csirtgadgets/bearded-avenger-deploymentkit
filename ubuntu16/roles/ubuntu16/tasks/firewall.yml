@@ -1,4 +1,0 @@
----
-- ufw: rule=allow port={{ item }} state=enabled
-  with_items: "{{ firewall_ports }}"
-  tags: ufw

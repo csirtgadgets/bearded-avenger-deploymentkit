@@ -24,10 +24,15 @@
         cif_store_store: 'elasticsearch'
       when: CIF_ES == "1"
 
+    - name: set build_sdist
+      set_fact:
+        cif_build_sdist: CIF_ANSIBLE_SDIST
+      when: CIF_ANSIBLE_SDIST is defined
+
     - import_tasks: tasks/main.yml
 
+
   roles:
-    #- { role: ubuntu16, tags: role-ubuntu16 }
     - { role: elastic.elasticsearch,
         es_config: {
           bootstrap.memory_lock: true,
@@ -35,8 +40,7 @@
           node.master: true,
         },
         es_version: "5.4.3",
-        when: router_store_store == 'elasticsearch'
+        when: router_store_store is defined and router_store_store == 'elasticsearch'
       }
     - { role: csirtgadgets.cif, tags: role-cif }
-
-  post_tasks:
+    - { role: nginx, tags: role-nginx }

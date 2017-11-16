@@ -23,6 +23,9 @@ else
     echo "/usr/bin/wget does not exist, skipping Internet connection test"
 fi
 
+# archive old versions
+bash archive_old_versions.sh
+
 ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 
 if [ -f /etc/lsb-release ]; then
