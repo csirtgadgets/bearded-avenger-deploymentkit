@@ -51,13 +51,12 @@ fi
 case $OS in
     "Ubuntu" )
     	if [ $VER == "14.04" ]; then
-    	    cd ubuntu14
-    	    bash bootstrap.sh
+    	    echo "14.04 is no longer supported, switch to 16.04 LTS (Server)"
     	elif [ $VER == "16.04" ]; then
     	    cd ubuntu16
     	    bash bootstrap.sh
     	else
-    	    echo "Currently only 14.04 or 16.04 LTS is supported"
+    	    echo "Currently only 16.04 LTS (Server) is supported"
     		echo "We accept Pull Requests! =)"
        	fi
        	;;
@@ -76,8 +75,11 @@ case $OS in
        if [ $VER == '7.3' ]; then
             cd centos7
             RHEL='1' bash bootstrap.sh
+        elif [ $VER == '7.4' ]; then
+            cd centos7
+            RHEL='1' bash bootstrap.sh
         else
-            echo 'only RHEL 7.3 is supported'
+            echo 'only RHEL 7.3|7.4 are supported'
             echo "We accept Pull Requests! =)"
         fi
         ;;
