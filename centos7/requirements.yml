@@ -1,0 +1,6 @@
+---
+# install elasticsearch role from galaxy
+- src: elastic.elasticsearch
+  version: 5.5.1
+
+- src: csirtgadgets.cif

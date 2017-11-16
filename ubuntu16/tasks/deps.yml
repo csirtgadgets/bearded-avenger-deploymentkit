@@ -1,0 +1,18 @@
+---
+- name: Add apt HTTPS support
+  apt: name="{{ item }}" state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: Update apt cache if needed.
+  apt: update_cache=yes cache_valid_time=3600 upgrade=yes
+
+- name: install deps
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - build-essential
+    - htop
+    - iotop
