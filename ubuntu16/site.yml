@@ -22,7 +22,10 @@
     - name: set store fact
       set_fact:
         router_store_store: 'elasticsearch'
-      when: CIF_ES == '1'
+        router_store_nodes: "{{ CIF_ES }}"
+      when: CIF_ES is defined and CIF_ES != ""
+
+    - debug: msg={{ CIF_ES }}
 
     - name: set build_sdist
       set_fact:
@@ -38,7 +41,7 @@
           node.data: true,
           node.master: true,
         },
-        es_version: "5.4.3",
+        es_version: "5.6.4",
         es_instance_name: 'cif',
         when: router_store_store is defined and router_store_store == 'elasticsearch'
       }
