@@ -11,6 +11,13 @@
     - "vars/main.yml"
     - "../global_vars.yml"
 
+  vars:
+    - GH_TOKEN: "{{ lookup('env', 'GH_TOKEN') }}"
+    - router_store_args: ''
+    - router_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+    - router_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
+    - router_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
+
   pre_tasks:
 
     - name: configure python
