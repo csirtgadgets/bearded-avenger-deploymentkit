@@ -11,6 +11,13 @@
     - "vars/main.yml"
     - "../global_vars.yml"
 
+  vars:
+    - GH_TOKEN: "{{ lookup('env', 'GH_TOKEN') }}"
+    - router_store_args: ''
+    - router_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+    - router_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
+    - router_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
+
   pre_tasks:
 
     - name: configure repos
@@ -28,8 +35,9 @@
 
     - name: set store fact
       set_fact:
-        cif_store_store: 'elasticsearch'
-      when: CIF_ES == "1"
+        router_store_store: 'elasticsearch'
+        router_store_nodes: "{{ CIF_ES }}"
+      when: CIF_ES is defined and CIF_ES != ""
 
     - name: set build_sdist
       set_fact:
@@ -41,11 +49,11 @@
   roles:
     - { role: elastic.elasticsearch,
         es_config: {
-          bootstrap.memory_lock: true,
           node.data: true,
           node.master: true,
         },
         es_version: "5.6.4",
+        es_instance_name: 'cif',
         when: router_store_store is defined and router_store_store == 'elasticsearch'
       }
     - { role: csirtgadgets.cif, tags: role-cif }

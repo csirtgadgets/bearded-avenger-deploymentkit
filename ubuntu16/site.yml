@@ -32,8 +32,6 @@
         router_store_nodes: "{{ CIF_ES }}"
       when: CIF_ES is defined and CIF_ES != ""
 
-    - debug: msg={{ CIF_ES }}
-
     - name: set build_sdist
       set_fact:
         cif_build_sdist: CIF_ANSIBLE_SDIST
