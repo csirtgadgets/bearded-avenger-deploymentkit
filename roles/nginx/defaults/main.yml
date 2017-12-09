@@ -1,0 +1,15 @@
+---
+nginx:
+  key_file: /etc/nginx/ssl/nginx.key
+  cert_file: /etc/nginx/ssl/nginx.crt
+  conf_path: /etc/nginx/sites-enabled/
+  conf_file: default
+  server_name: localhost
+  country: US
+  state: NY
+  city: Buffalo
+  org: csirtgadgets
+  cn: localhost
+  days: 3650
+  rsa: 4096
+  server_name: cif

@@ -1,0 +1,35 @@
+---
+- name: install nginx
+  apt: state=latest pkg=nginx
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install nginx
+  yum: state=latest pkg=nginx
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: create directories for ssl certificiates
+  file: path=/etc/nginx/ssl state=directory
+
+- name: generate TLS key
+  command:
+    openssl req -subj
+    '/C={{ nginx_country | default(nginx.country) }}/ST={{ nginx_state | default(nginx.state) }}/L={{ nginx_city | default(nginx.city) }}/O={{ nginx_org | default(nginx.org) }}/CN={{ nginx_cn | default(nginx.cn) }}'
+    -x509 -nodes -days {{ nginx_days | default(nginx.days) }} -newkey rsa:{{ nginx_rsa | default(nginx.rsa) }} -keyout {{ nginx_key_file | default(nginx.key_file) }}
+    -out {{ nginx_cert_file | default(nginx.cert_file)  }}
+
+- name: fix key perms
+  file: path={{ item }} mode=600
+  with_items:
+    - "{{ nginx_cert_file | default(nginx.cert_file) }}"
+    - "{{ nginx_key_file | default(nginx.key_file) }}"
+
+- name: copy nginx config file
+  template: src=templates/centos/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: copy nginx config file
+  template: src=templates/ubuntu/nginx.conf.j2 dest=/etc/nginx/sites-enabled/default
+  when: ansible_distribution == 'Ubuntu'
+
+- name: restart nginx
+  service: name=nginx state=restarted daemon_reload=yes enabled=yes

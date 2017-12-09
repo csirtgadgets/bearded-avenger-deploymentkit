@@ -1,0 +1,61 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+    return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        listen [::]:443 ssl http2;
+
+        gzip on;
+        gzip_comp_level 2;
+        gzip_http_version 1.0;
+        gzip_proxied any;
+        gzip_min_length 1100;
+
+        gzip_buffers 16 8k;
+        gzip_types text/plain;
+
+        ssl_session_timeout  5m;
+
+        ssl_protocols  TLSv1.2 TLSv1.1 TLSv1;
+        # https://mozilla.github.io/server-side-tls/ssl-config-generator/
+        ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+        ssl_prefer_server_ciphers on;
+
+        ssl_session_cache shared:SSL:50m;
+        ssl_session_tickets off;
+
+        # OCSP Stapling ---
+        # fetch OCSP records from URL in ssl_certificate and cache them
+        ssl_stapling on;
+        ssl_stapling_verify on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        location / {
+            gzip off;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://localhost:5000;
+        }
+
+        server_name {{ nginx_server_name | default(nginx.server_name) }};
+        ssl_certificate {{ nginx_cert_file | default(nginx.cert_file) }};
+        ssl_certificate_key {{ nginx_key_file | default(nginx.key_file) }};
+
+        error_page  404              /404.html;
+        location = /404.html {
+            root   /usr/share/nginx/html;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+}
