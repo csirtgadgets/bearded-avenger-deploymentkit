@@ -11,7 +11,7 @@ ansible-galaxy install elastic.elasticsearch,5.5.1
 # test to see if we've linked this in development
 # install by default in production
 if [ ! -e roles/csirtgadgets.cif ] && [ ! -e ../roles/csirtgadgets.cif ]; then
-  ansible-galaxy install csirtgadgets.cif
+  ansible-galaxy install csirtgadgets.cif,0.0.2
 fi
 
 echo 'running ansible...'
