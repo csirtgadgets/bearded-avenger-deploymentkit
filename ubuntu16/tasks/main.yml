@@ -4,7 +4,7 @@
   when: ansible_distribution_version | version_compare('16.04', '<')
 
 - include_tasks: firewall.yml
-  when: DOCKER_BUILD is defined and DOCKER_BUILD != ""
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == 'no'
   tags: firewall
 
 - include_tasks: deps.yml
