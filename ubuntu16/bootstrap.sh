@@ -13,9 +13,8 @@ sudo apt-get update && apt-get install -y build-essential python-dev python2.7 p
     python-pip libffi-dev libssl-dev sqlite3 software-properties-common
 
 echo 'checking for python-openssl'
-dpkg -l | grep python-openssl
-ret="$?"
-if [ "$ret" -eq 0 ]; then
+EXISTS=$( dpkg -l | grep python-openssl )
+if [[ ! -z ${EXISTS} ]]; then
 	echo "Python-openssl found. Applying workaround"
 	echo "#@link https://github.com/csirtgadgets/bearded-avenger-deploymentkit/issues/15"
 	echo "# sudo apt-get --auto-remove --yes remove python-openssl"
