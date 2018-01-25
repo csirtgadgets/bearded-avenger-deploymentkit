@@ -12,6 +12,17 @@ echo 'installing the basics'
 sudo apt-get update && apt-get install -y build-essential python-dev python2.7 python-pip python-dev aptitude \
     python-pip libffi-dev libssl-dev sqlite3 software-properties-common
 
+echo 'checking for python-openssl'
+dpkg -l | grep python-openssl
+ret="$?"
+if [ "$ret" -eq 0 ]; then
+	echo "Python-openssl found. Applying workaround"
+	echo "#@link https://github.com/csirtgadgets/bearded-avenger-deploymentkit/issues/15"
+	echo "# sudo apt-get --auto-remove --yes remove python-openssl"
+	echo "# sudo pip install pyOpenSSL"
+	sudo apt-get --auto-remove --yes remove python-openssl && sudo pip install pyOpenSSL	
+fi
+
 bash ../ansible.sh
 
 if [[ "$CIF_BOOTSTRAP_TEST" -eq '1' ]]; then
