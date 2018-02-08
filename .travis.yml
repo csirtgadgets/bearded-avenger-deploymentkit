@@ -6,7 +6,7 @@ python:
     - 2.7
 
 before_install:
-  - apt-get install shellcheck
+  - sudo apt-get install shellcheck
 
 script:
   - shellcheck easybutton.sh
