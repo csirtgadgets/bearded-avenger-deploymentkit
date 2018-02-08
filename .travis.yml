@@ -9,6 +9,6 @@ before_install:
   - sudo apt-get install shellcheck
 
 script:
-  - shellcheck easybutton.sh
-  - shellcheck ubuntu16/bootstrap.sh
-  - shellcheck centos7/bootstrap.sh
+  - shellcheck -x easybutton.sh
+  - shellcheck -x ubuntu16/bootstrap.sh
+  - shellcheck -x centos7/bootstrap.sh

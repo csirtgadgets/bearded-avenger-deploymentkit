@@ -7,7 +7,7 @@ export CIF_GATHERER_GEO_FQDN=$CIF_GATHERER_GEO_FQDN
 export CIF_HUNTER_ADVANCED=$CIF_HUNTER_ADVANCED
 export RHEL=$RHEL
 
-if [ ${RHEL} == '1' ]; then
+if [ "${RHEL}" == '1' ]; then
     subscription-manager repos --enable rhel-7-server-extras-rpms
 else
     yum -y install epel-release
