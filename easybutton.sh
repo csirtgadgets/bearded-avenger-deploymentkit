@@ -2,17 +2,16 @@
 
 set -e
 
-if [ `whoami` != 'root' ]; then
+if [ "$(whoami)" != 'root' ]; then
     echo "must be run as root"
     exit 1
 fi
 
 # Check for an Internet Connection as it is required during installation
 HTTP_HOST=http://github.com
-if [ -x /usr/bin/wget ]; then
+if [ -x "$(which wget)" ]; then
     echo "Checking for an Internet connection"
-    wget -q --tries=3 --timeout=10 --spider $HTTP_HOST
-    if [[ $? -eq 0 ]]; then
+    if [[ "$(wget -q --tries=3 --timeout=10 --spider $HTTP_HOST)" -eq 0 ]]; then
         echo "$HTTP_HOST appears to be available via HTTP"
     else
         echo "$HTTP_HOST does not appear to be available via HTTP"
@@ -26,9 +25,8 @@ fi
 # archive old versions
 bash archive_old_versions.sh
 
-ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
-
 if [ -f /etc/lsb-release ]; then
+    # shellcheck disable=SC1091
     . /etc/lsb-release
     OS=$DISTRIB_ID
     VER=$DISTRIB_RELEASE
@@ -36,10 +34,12 @@ elif [ -f /etc/debian_version ]; then
     OS=Debian  # XXX or Ubuntu??
     VER=$(cat /etc/debian_version)
 elif [ -f /etc/centos-release ]; then
+    # shellcheck disable=SC1091
     . /etc/os-release
     OS=$NAME
     VER=$VERSION_ID
 elif [ -f /etc/redhat-release ]; then
+    # shellcheck disable=SC1091
     . /etc/os-release
     OS=$NAME
     VER=$VERSION_ID
@@ -50,9 +50,9 @@ fi
 
 case $OS in
     "Ubuntu" )
-    	if [ $VER == "14.04" ]; then
+    	if [ "$VER" == "14.04" ]; then
     	    echo "14.04 is no longer supported, switch to 16.04 LTS (Server)"
-    	elif [ $VER == "16.04" ]; then
+    	elif [ "$VER" == "16.04" ]; then
     	    cd ubuntu16
     	    bash bootstrap.sh
     	else
@@ -72,10 +72,10 @@ case $OS in
         exit 1;;
 
     "Red Hat Enterprise Linux Server" )
-       if [ $VER == '7.3' ]; then
+       if [ "$VER" == '7.3' ]; then
             cd centos7
             RHEL='1' bash bootstrap.sh
-        elif [ $VER == '7.4' ]; then
+        elif [ "$VER" == '7.4' ]; then
             cd centos7
             RHEL='1' bash bootstrap.sh
         else
@@ -85,7 +85,7 @@ case $OS in
         ;;
 
     "CentOS Linux" )
-        if [ $VER == '7' ]; then
+        if [ "$VER" == '7' ]; then
             cd centos7
             bash bootstrap.sh
         else
