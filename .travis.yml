@@ -1,0 +1,14 @@
+sudo: required
+dist: trusty
+language: python
+
+python:
+    - 2.7
+
+before_install:
+  - sudo apt-get install shellcheck
+
+script:
+  - shellcheck -x easybutton.sh
+  - shellcheck -x ubuntu16/bootstrap.sh
+  - shellcheck -x centos7/bootstrap.sh
