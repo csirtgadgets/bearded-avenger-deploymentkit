@@ -33,3 +33,4 @@
 
 - name: restart nginx
   service: name=nginx state=restarted daemon_reload=yes enabled=yes
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == 'no'
