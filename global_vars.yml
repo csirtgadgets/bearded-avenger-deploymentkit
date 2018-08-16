@@ -2,6 +2,6 @@
 CIF_ES: "{{ lookup('env', 'CIF_ANSIBLE_ES') }}"
 cif_build_sdist: "{{ lookup('env', 'CIF_ANSIBLE_SDIST') | default() }}"
 router_store_nodes: "{{ lookup('env','CIF_ANSIBLE_ES_NODES')|default('localhost:9200', true) }}"
-cif_version: '3.0.0rc4'
+cif_version: '3.0.0rc5'
 es_version: "5.4.6"
 DOCKER_BUILD: "{{ lookup('env', 'DOCKER_BUILD') }}"
