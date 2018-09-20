@@ -51,6 +51,8 @@ sudo -E -u cif cif --config /home/cif/.cif.yml --provider openphish.com
 
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags scanner
 
+sudo -E -u cif cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags scanner --days 17
+
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype fqdn --feed --tags search
 
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype url --feed --tags uce
@@ -62,6 +64,10 @@ sudo -E -u cif cif --config /home/cif/.cif.yml --itype ipv4 --feed --tags phishi
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype ipv4 --confidence 1,6 --no-feed -d
 
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype fqdn --confidence 1,6 --no-feed -d
+
+sudo -E -u cif cif --indicator csirtg.io --tags malware --submit --confidence 8
+
+sudo -E -u cif cif --config /home/cif/.cif.yml -nq csirtg.io
 
 echo
 echo
