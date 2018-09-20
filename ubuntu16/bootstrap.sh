@@ -24,6 +24,8 @@ if [[ ! -z ${EXISTS} ]]; then
 	sudo apt-get --auto-remove --yes remove python-openssl && sudo pip install pyOpenSSL
 fi
 
+sudo pip install 'pytest>=2.8.0,<3.0'
+
 bash ../ansible.sh
 
 if [[ "$CIF_BOOTSTRAP_TEST" -eq '1' ]]; then
