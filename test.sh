@@ -65,7 +65,8 @@ sudo -E -u cif cif --config /home/cif/.cif.yml --itype ipv4 --confidence 1,6 --n
 
 sudo -E -u cif cif --config /home/cif/.cif.yml --itype fqdn --confidence 1,6 --no-feed -d
 
-sudo -E -u cif cif --indicator csirtg.io --tags malware --submit --confidence 8
+echo "testing submissions"
+sudo -E -u cif cif --config /home/cif/.cif.yml --indicator csirtg.io --tags malware --submit --confidence 8
 
 sudo -E -u cif cif --config /home/cif/.cif.yml -nq csirtg.io
 
