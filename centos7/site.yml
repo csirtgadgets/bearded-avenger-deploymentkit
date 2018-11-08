@@ -52,7 +52,7 @@
           node.data: true,
           node.master: true,
         },
-        es_version: "5.6.4",
+        es_version: "5.6.13",
         es_instance_name: 'cif',
         when: router_store_store is defined and router_store_store == 'elasticsearch'
       }
