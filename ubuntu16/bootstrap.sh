@@ -12,6 +12,8 @@ echo 'installing the basics'
 sudo apt-get update && apt-get install -y build-essential python-dev python2.7 python-pip python-dev aptitude \
     python-pip libffi-dev libssl-dev sqlite3 software-properties-common
 
+sudo pip install pip --upgrade
+
 echo 'checking for python-openssl'
 set +e
 EXISTS=$( dpkg -l | grep python-openssl )
